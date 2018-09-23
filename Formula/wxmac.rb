@@ -46,6 +46,7 @@ class Wxmac < Formula
       "--with-opengl",
       "--with-osx_cocoa",
       "--with-zlib",
+			"--enable-universal-binary=i386,x86_64",
       "--disable-precomp-headers",
       # This is the default option, but be explicit
       "--disable-monolithic",
