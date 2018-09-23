@@ -6,6 +6,8 @@ class Wxmac < Formula
   revision 1
   head "https://github.com/wxWidgets/wxWidgets.git"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "1ddeb111fc0519d87dbdb4cf3887c0976ea4e077bb6e6c26493b7d1ec930b048" => :mojave
@@ -27,6 +29,7 @@ class Wxmac < Formula
   depends_on "libtiff"
 
   def install
+		ENV.universal_binary if build.universal?
     args = [
       "--prefix=#{prefix}",
       "--enable-clipboard",
