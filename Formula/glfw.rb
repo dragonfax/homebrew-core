@@ -20,7 +20,10 @@ class Glfw < Formula
 
   depends_on "cmake" => :build
 
+	option :universal
+
   def install
+		ENV.universal_binary if build.universal?
     args = std_cmake_args + %w[
       -DGLFW_USE_CHDIR=TRUE
       -DGLFW_USE_MENUBAR=TRUE
