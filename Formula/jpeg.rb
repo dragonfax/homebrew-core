@@ -18,7 +18,7 @@ class Jpeg < Formula
     system "./configure", "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make", "install"
+    system "make", "install",'CFLAGS=-arch i386 -arch x86_64'
   end
 
   test do
