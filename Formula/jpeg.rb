@@ -6,6 +6,8 @@ class Jpeg < Formula
   mirror "https://fossies.org/linux/misc/jpegsrc.v9c.tar.gz"
   sha256 "650250979303a649e21f87b5ccd02672af1ea6954b911342ea491f351ceb7122"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "1daa0fc0c197d96dd4e1afddb9ad576951a15aafd6b85138b8a60817d1d8173c" => :mojave
@@ -15,10 +17,11 @@ class Jpeg < Formula
   end
 
   def install
+		ENV.universal_binary if build.universal?
     system "./configure", "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"
-    system "make", "install",'CFLAGS=-arch i386 -arch x86_64'
+    system "make", "install"
   end
 
   test do
