@@ -6,6 +6,8 @@ class Libtiff < Formula
   sha256 "6e7bdeec2c310734e734d19aae3a71ebe37a4d842e0e23dbb1b8921c0026cfcd"
   revision 4
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "619d93542a46b0b4782f0cc39e4ea568b1e05e353e6e27296cd4d2ad54a7e9d6" => :mojave
@@ -37,6 +39,7 @@ class Libtiff < Formula
   end
 
   def install
+		ENV.universal_binary if build.universal?
     args = %W[
       --disable-dependency-tracking
       --prefix=#{prefix}
