@@ -4,6 +4,8 @@ class Freeglut < Formula
   url "https://downloads.sourceforge.net/project/freeglut/freeglut/3.0.0/freeglut-3.0.0.tar.gz"
   sha256 "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff999f76a2"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "5d701c190fea27fad91532d1e66164d6ebeb4f406dc91291986b841c4fe169ef" => :mojave
@@ -19,6 +21,7 @@ class Freeglut < Formula
   patch :DATA
 
   def install
+		ENV.universal_binary if build.universal?
     inreplace "src/x11/fg_main_x11.c", "CLOCK_MONOTONIC", "UNDEFINED_GIBBERISH"
     system "cmake", "-D", "FREEGLUT_BUILD_DEMOS:BOOL=OFF", "-D", "CMAKE_INSTALL_PREFIX:PATH=#{prefix}", "."
     system "make", "all"

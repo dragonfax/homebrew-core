@@ -5,6 +5,8 @@ class Libpng < Formula
   mirror "https://sourceforge.mirrorservice.org/l/li/libpng/libpng16/1.6.35/libpng-1.6.35.tar.xz"
   sha256 "23912ec8c9584917ed9b09c5023465d71709dce089be503c7867fec68a93bcd7"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "8a76a432c62a531b61f7229ce23977ff4accb2b8ee7c65cef886184c36500558" => :mojave
@@ -22,6 +24,7 @@ class Libpng < Formula
   end
 
   def install
+		ENV.universal_binary if build.universal?
     system "./configure", "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}"

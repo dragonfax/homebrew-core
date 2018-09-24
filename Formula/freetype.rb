@@ -5,6 +5,8 @@ class Freetype < Formula
   mirror "https://download.savannah.gnu.org/releases/freetype/freetype-2.9.1.tar.bz2"
   sha256 "db8d87ea720ea9d5edc5388fc7a0497bb11ba9fe972245e0f7f4c7e8b1e1e84d"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "64d650278af1f74d43165f3943287b42109710e672d2756abaa492f0cc4d52b7" => :mojave
@@ -16,6 +18,7 @@ class Freetype < Formula
   depends_on "libpng"
 
   def install
+		ENV.universal_binary if build.universal?
     system "./configure", "--prefix=#{prefix}",
                           "--enable-freetype-config",
                           "--without-harfbuzz"
