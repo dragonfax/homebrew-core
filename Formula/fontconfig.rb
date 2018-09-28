@@ -4,6 +4,8 @@ class Fontconfig < Formula
   url "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.bz2"
   sha256 "f655dd2a986d7aa97e052261b36aa67b0a64989496361eca8d604e6414006741"
 
+	option :universal
+
   # The bottle tooling is too lenient and thinks fontconfig
   # is relocatable, but it has hardcoded paths in the executables.
   bottle do
@@ -32,6 +34,7 @@ class Fontconfig < Formula
   depends_on "freetype"
 
   def install
+	    ENV.universal_binary if build.universal?
     font_dirs = %w[
       /System/Library/Fonts
       /Library/Fonts

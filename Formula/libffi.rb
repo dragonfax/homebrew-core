@@ -6,6 +6,8 @@ class Libffi < Formula
   mirror "https://mirrorservice.org/sites/ftp.debian.org/debian/pool/main/libf/libffi/libffi_3.2.1.orig.tar.gz"
   sha256 "d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "8d9b153f501fcc5103bb96b00be9a1aea6a0c09e5d61b9acfb998546c3301582" => :mojave
@@ -25,6 +27,7 @@ class Libffi < Formula
   keg_only :provided_by_macos, "some formulae require a newer version of libffi"
 
   def install
+	    ENV.universal_binary if build.universal?
     system "./autogen.sh" if build.head?
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"

@@ -5,6 +5,8 @@ class Gettext < Formula
   mirror "https://ftpmirror.gnu.org/gettext/gettext-0.19.8.1.tar.xz"
   sha256 "105556dbc5c3fbbc2aa0edb46d22d055748b6f5c7cd7a8d99f8e7eb84e938be4"
 
+	option :universal
+
   bottle do
     sha256 "afc6a6120632b98d58b11fab82ae5e081206b89684dd948abf2d29caeb813ffd" => :mojave
     sha256 "99d2dbd4c9ebfe9bf2a64bd99f3a695a18635f0d9110eaff34bab8022abef6a8" => :high_sierra
@@ -21,6 +23,7 @@ class Gettext < Formula
   depends_on "libxml2" if MacOS.version <= :mountain_lion
 
   def install
+	    ENV.universal_binary if build.universal?
     system "./configure", "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--disable-debug",

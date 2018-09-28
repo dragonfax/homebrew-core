@@ -5,6 +5,8 @@ class Pcre < Formula
   mirror "https://www.mirrorservice.org/sites/ftp.exim.org/pub/pcre/pcre-8.42.tar.bz2"
   sha256 "2cd04b7c887808be030254e8d77de11d3fe9d4505c39d4b15d2664ffe8bf9301"
 
+	option :universal
+
   bottle do
     cellar :any
     sha256 "f848e72c9a6ddfdd4e57d25df859830187cbb8e850996b22a84270a6590f56ff" => :mojave
@@ -22,6 +24,7 @@ class Pcre < Formula
   end
 
   def install
+	    ENV.universal_binary if build.universal?
     system "./autogen.sh" if build.head?
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",

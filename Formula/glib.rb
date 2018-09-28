@@ -5,6 +5,8 @@ class Glib < Formula
   sha256 "c0f4ce0730b4f95c47b711613b5406a887c2ee13ea6d25930d72a4fa7fdb77f6"
   revision 1
 
+	option :universal
+
   bottle do
     sha256 "7aaa24ceea95436299ec13251aba2b53b7b75ed622819d94686b54c638f4308b" => :mojave
     sha256 "cf62335e49678260e16ea6a6af2ddc971d538f535b2e8e83bf5ad4d14b53036a" => :high_sierra
@@ -43,6 +45,7 @@ class Glib < Formula
   end
 
   def install
+	    ENV.universal_binary if build.universal?
     inreplace %w[gio/gdbusprivate.c gio/xdgmime/xdgmime.c glib/gutils.c],
       "@@HOMEBREW_PREFIX@@", HOMEBREW_PREFIX
 
